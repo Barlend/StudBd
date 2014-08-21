@@ -9,7 +9,7 @@
 #include <QSqlQuery>
 #include <QSqlTableModel>
 #include <QTableView>
-
+#include "addstudentform.h"
 namespace Ui {
 class MainWindow;
 }
@@ -32,6 +32,10 @@ private slots:
 
     void on_FacultiescomboBox_currentIndexChanged(int index);
 
+    void on_pushButton_clicked();
+
+    void on_FacultiescomboBox_activated(int index);
+
 private:
     void FacultitesQuery();
     Ui::MainWindow *ui;
@@ -40,6 +44,8 @@ private:
     QStringList tempforfacultites,tempforinstitutes;
     QSqlTableModel *model;
     QTableView *tableView;
+    AddStudentForm *AddstudForm;
+    QSqlQueryModel *qm;
 };
 
 #endif // MAINWINDOW_H
