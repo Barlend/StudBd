@@ -6,8 +6,28 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->tableWidget->setRowCount(5);
-    ui->tableWidget->setColumnCount(5);
+
+    model = new QSqlTableModel;
+    model->setTable("Students");
+
+    model->select();
+    model->setHeaderData(0, Qt::Horizontal, "Прізвище");
+    model->setHeaderData(1, Qt::Horizontal, "Ім'я");
+    model->setHeaderData(2, Qt::Horizontal, "По-батькові");
+    model->setHeaderData(3, Qt::Horizontal, "Номер групи");
+    tableView = new QTableView;
+    model->removeColumn(0);
+
+    ui->tableView->hideColumn(0);
+    ui->tableView->setModel(model);
+    //    tableView->setEnabled(false);
+
+    ui->tableView->show();
+
+
+
+    //    ui->tableWidget->setRowCount(5);
+    //    ui->tableWidget->setColumnCount(5);
     ///////////////////////////////////////////////////////////////////////////
     /// \brief queryForFacultiesBox1
     /// додавання списку факультетів до комбобоксу вибору
@@ -124,18 +144,6 @@ void MainWindow::on_FacultiescomboBox_currentIndexChanged(const QString &arg1)
 
 }
 
-//void MainWindow::on_FacultiescomboBox_activated(const QString &arg1)
-//{
-//    QString temp1="SELECT StudBd1.Departments.nameOfDepatment FROM StudBd1.Departments WHERE StudBd1.Faculties.IdForFaculties = " + arg1 ;
-//     QStringList temp;
-//    QSqlQuery queryForDepartmentcombobox(temp1);
-
-//   while(queryForDepartmentcombobox.next()){
-//       QString department = queryForDepartmentcombobox.value(0).toString();
-//       temp.push_back(department);
-//   }
-//   ui->DepartmentscomboBox->addItems(temp);
-//}
 
 void MainWindow::on_FacultiescomboBox_currentIndexChanged(int index)
 {

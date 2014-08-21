@@ -12,3 +12,10 @@ AddStudentForm::~AddStudentForm()
 {
     delete ui;
 }
+
+
+
+void AddStudentForm::on_AddSudentButton_clicked()
+{
+
+}

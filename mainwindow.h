@@ -6,6 +6,10 @@
 #include <QDateTime>
 #include <QComboBox>
 #include <QSqlQueryModel>
+#include <QSqlQuery>
+#include <QSqlTableModel>
+#include <QTableView>
+
 namespace Ui {
 class MainWindow;
 }
@@ -34,6 +38,8 @@ private:
     QString AcountAccessLevl;
     QDateTime data;
     QStringList tempforfacultites,tempforinstitutes;
+    QSqlTableModel *model;
+    QTableView *tableView;
 };
 
 #endif // MAINWINDOW_H
