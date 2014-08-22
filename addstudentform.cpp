@@ -6,7 +6,7 @@ AddStudentForm::AddStudentForm(QWidget *parent) :
     ui(new Ui::AddStudentForm)
 {
     ui->setupUi(this);
-
+    this->setWindowTitle("Додавання нового студента");
 
     //////////////////////////
     QSqlQuery queryForFacultiesBox1("SELECT NameOfFaculties  FROM StudBd1.Faculties");
@@ -35,7 +35,7 @@ AddStudentForm::~AddStudentForm()
 void AddStudentForm::on_AddSudentButton_clicked()
 {
     QSqlQuery addStudentQuery;
-    addStudentQuery.prepare("insert into StudBd1.Students (Name, FirstName, LastName, NumberOfGroup, IdOfFaculties, IdOfDepartment, Telephone, MotherName,FatherName, ParentsPhone)"
+    addStudentQuery.prepare("insert into StudBd1.Students (Name, FirstName, LastName, NumberOfGroup, IdOfFaculties, IdOfDepartment, Telephone, MotherName, FatherName, ParentsPhone)"
                             "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     addStudentQuery.addBindValue(ui->nameLabel->text());
     addStudentQuery.addBindValue(ui->firstName->text());
@@ -48,11 +48,7 @@ void AddStudentForm::on_AddSudentButton_clicked()
     addStudentQuery.addBindValue(ui->FatherNameLineEdit->text());
     addStudentQuery.addBindValue(ui->ParentsTelefonNumber->text());
     addStudentQuery.exec();
-    if(addStudentQuery.isValid()){
-        qDebug () <<"Yes";
-    }/*else{
-//        qDebug()<< addStudentQuery.lastError();
-    }*/
+
 }
 
 void AddStudentForm::on_FacultiescomboBox_currentIndexChanged(int index)

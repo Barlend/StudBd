@@ -27,3 +27,4 @@ FORMS    += mainwindow.ui \
     loginform.ui \
     registerform.ui \
     addstudentform.ui
+ RC_FILE = StudBd.rc
