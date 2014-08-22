@@ -35,12 +35,24 @@ AddStudentForm::~AddStudentForm()
 void AddStudentForm::on_AddSudentButton_clicked()
 {
     QSqlQuery addStudentQuery;
-    addStudentQuery.prepare("insert into StudBd1.Students (Name, FirstName, LastName, NumberOfGroup, IdOfFaculties, IdOfDepartment, Telephone, MotherName,FatherName, ParentsPhone)");
+    addStudentQuery.prepare("insert into StudBd1.Students (Name, FirstName, LastName, NumberOfGroup, IdOfFaculties, IdOfDepartment, Telephone, MotherName,FatherName, ParentsPhone)"
+                            "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     addStudentQuery.addBindValue(ui->nameLabel->text());
     addStudentQuery.addBindValue(ui->firstName->text());
     addStudentQuery.addBindValue(ui->lasNameLineEdit->text());
     addStudentQuery.addBindValue(ui->GroupNumderLineEdit->text());
-    addStudentQuery.addBindValue();
+    addStudentQuery.addBindValue(ui->FacultiescomboBox->currentIndex() + 1);
+    addStudentQuery.addBindValue(ui->DepartmentscomboBox->currentIndex() + 1);
+    addStudentQuery.addBindValue(ui->TelephoneOfStudent->text());
+    addStudentQuery.addBindValue(ui->MotherNameLineEdit->text());
+    addStudentQuery.addBindValue(ui->FatherNameLineEdit->text());
+    addStudentQuery.addBindValue(ui->ParentsTelefonNumber->text());
+    addStudentQuery.exec();
+    if(addStudentQuery.isValid()){
+        qDebug () <<"Yes";
+    }/*else{
+//        qDebug()<< addStudentQuery.lastError();
+    }*/
 }
 
 void AddStudentForm::on_FacultiescomboBox_currentIndexChanged(int index)
@@ -57,3 +69,12 @@ void AddStudentForm::on_FacultiescomboBox_currentIndexChanged(int index)
     }
     ui->DepartmentscomboBox->addItems(temp);
 }
+
+
+
+
+
+
+
+
+

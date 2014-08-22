@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QLineEdit>
 #include <QSqlQuery>
+#include <QDebug>
 namespace Ui {
 class AddStudentForm;
 }
