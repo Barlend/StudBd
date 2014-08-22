@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QLineEdit>
-
+#include <QSqlQuery>
 namespace Ui {
 class AddStudentForm;
 }
@@ -20,8 +20,11 @@ private slots:
 
     void on_AddSudentButton_clicked();
 
+    void on_FacultiescomboBox_currentIndexChanged(int index);
+
 private:
     Ui::AddStudentForm *ui;
+    QStringList tempforfacultites;
 };
 
 #endif // ADDSTUDENTFORM_H

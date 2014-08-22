@@ -185,7 +185,7 @@ void MainWindow::on_FacultiescomboBox_activated(int index)
 //    QueryForFaculties("");
 //    QueryForFaculties.bindValue(0, ui->FacultiescomboBox->currentIndex() +2);
 //    QueryForFaculties.exec();
-    qDebug() << ui->FacultiescomboBox->currentIndex() <<" - is index";
+    qDebug() << ui->FacultiescomboBox->currentIndex()+1 <<" - is index";
 
 
     qm->setQuery(QueryForFaculties);
@@ -194,4 +194,24 @@ void MainWindow::on_FacultiescomboBox_activated(int index)
     ui->tableView->setModel(qm);
 
 
+}
+
+void MainWindow::on_DepartmentscomboBox_currentIndexChanged(int index)
+{
+    QSqlQuery QueryForFaculties("select s.Name, s.FirstName, s.LastName from StudBd1.Students s, StudBd1.Departments d, StudBd1.Faculties f where s.IdOfDepartment = d.id and s.IdOfFaculties = f.id and s.IdOfDepartment = '"+QString::number(ui->DepartmentscomboBox->currentIndex()+1) + "' and s.IdOfFaculties  = '"+QString::number(ui->FacultiescomboBox->currentIndex()+1) +"'");
+
+//    QueryForFaculties("");
+//    QueryForFaculties.bindValue(0, ui->FacultiescomboBox->currentIndex() +2);
+//    QueryForFaculties.exec();
+    qDebug() <<"ui->FacultiescomboBox->currentIndex()+1 ----" <<ui->FacultiescomboBox->currentIndex()+1 <<" - is index";
+
+
+    qm->setQuery(QueryForFaculties);
+
+    //    model->setQuery(QSqlQuery(QueryForFaculties));
+    ui->tableView->setModel(qm);
+
+
+
+//        select s.Name, s.FirstName, s.LastName from StudBd1.Students s, StudBd1.Departments d, StudBd1.Faculties f where f.id = 1 	and d.IdForFaculties = f.id	and d.IdForFaculties =
 }

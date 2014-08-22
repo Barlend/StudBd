@@ -36,6 +36,8 @@ private slots:
 
     void on_FacultiescomboBox_activated(int index);
 
+    void on_DepartmentscomboBox_currentIndexChanged(int index);
+
 private:
     void FacultitesQuery();
     Ui::MainWindow *ui;
