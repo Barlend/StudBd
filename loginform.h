@@ -10,7 +10,7 @@
 #include <QMouseEvent>
 #include <QPushButton>
 #include <QAbstractButton>
-#include "connecttodatabase.h"
+//#include "connecttodatabase.h"
 namespace Ui {
 class LoginForm;
 }
@@ -39,7 +39,7 @@ private:
     MainWindow *mainForm;
     QString accesslevel;
     QStringList Listforauth;
-    ConnectToDatabase *con;
+//    ConnectToDatabase *con;
 
 };
 

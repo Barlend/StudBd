@@ -16,20 +16,17 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     loginform.cpp \
     registerform.cpp \
-    addstudentform.cpp \
-    connecttodatabase.cpp
+    addstudentform.cpp
 
 HEADERS  += mainwindow.h \
     loginform.h \
     registerform.h \
-    addstudentform.h \
-    connecttodatabase.h
+    addstudentform.h
 
 FORMS    += mainwindow.ui \
     loginform.ui \
     registerform.ui \
-    addstudentform.ui \
-    connecttodatabase.ui
+    addstudentform.ui
  RC_FILE = StudBd.rc
 
 RESOURCES += \

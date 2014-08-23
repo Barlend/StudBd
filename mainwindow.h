@@ -37,9 +37,19 @@ private slots:
 
     void on_FacultiescomboBox_activated(int index);
 
-    void on_DepartmentscomboBox_currentIndexChanged(int index);
+//    void on_DepartmentscomboBox_currentIndexChanged(int index);
 
     void on_tableView_doubleClicked(const QModelIndex &index);
+
+    void on_DepartmentscomboBox_activated(int index);
+
+
+
+    void on_tableView_activated(const QModelIndex &index);
+
+
+
+    void on_tableWidget_cellDoubleClicked(int row, int column);
 
 private:
     void FacultitesQuery();
