@@ -241,8 +241,34 @@ void MainWindow::on_tableView_doubleClicked(const QModelIndex &index)
 
 void MainWindow::on_DepartmentscomboBox_activated(int index)
 {
+    ui->tableWidget->clear();
+    ui->tableWidget->setRowCount(0);
     QSqlQuery QueryForFaculties("select s.Name, s.FirstName, s.LastName from StudBd1.Students s, StudBd1.Departments d, StudBd1.Faculties f where s.IdOfDepartment = d.id and s.IdOfFaculties = f.id and s.IdOfDepartment = '"+QString::number(ui->DepartmentscomboBox->currentIndex()+1) + "' and s.IdOfFaculties  = '"+QString::number(ui->FacultiescomboBox->currentIndex()+1) +"'");
 
+    /////////////
+
+    QueryForFaculties.exec();
+    qDebug() << ui->FacultiescomboBox->currentIndex()+1 <<" - is index";
+    ui->tableWidget->setColumnCount(3);
+    while(QueryForFaculties.next()){
+        ui->tableWidget->insertRow(0);
+        ui->tableWidget->setItem(0,0, new QTableWidgetItem(QueryForFaculties.value(0).toString()));
+        ui->tableWidget->setItem(0,1, new QTableWidgetItem(QueryForFaculties.value(1).toString()));
+        ui->tableWidget->setItem(0,2, new QTableWidgetItem(QueryForFaculties.value(2).toString()));
+        ui->tableWidget->setRowHeight(0,20);
+    }
+
+
+
+
+
+
+
+
+
+
+
+    ///////////
     //    QueryForFaculties("");
     //    QueryForFaculties.bindValue(0, ui->FacultiescomboBox->currentIndex() +2);
     //    QueryForFaculties.exec();
@@ -309,7 +335,7 @@ void MainWindow::on_tableWidget_cellDoubleClicked(int row, int column)
 
         QTableWidgetItem *item2 = ui->tableWidget->item(row, column );
         QString temp3 = item2->text();
-        qDebug() <<"temp " <<temp3;
+        qDebug() <<"temp " << temp3;
     }
 
 }
