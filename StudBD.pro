@@ -16,15 +16,21 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     loginform.cpp \
     registerform.cpp \
-    addstudentform.cpp
+    addstudentform.cpp \
+    connecttodatabase.cpp
 
 HEADERS  += mainwindow.h \
     loginform.h \
     registerform.h \
-    addstudentform.h
+    addstudentform.h \
+    connecttodatabase.h
 
 FORMS    += mainwindow.ui \
     loginform.ui \
     registerform.ui \
-    addstudentform.ui
+    addstudentform.ui \
+    connecttodatabase.ui
  RC_FILE = StudBd.rc
+
+RESOURCES += \
+    res.qrc

@@ -48,6 +48,7 @@ void AddStudentForm::on_AddSudentButton_clicked()
     addStudentQuery.addBindValue(ui->FatherNameLineEdit->text());
     addStudentQuery.addBindValue(ui->ParentsTelefonNumber->text());
     addStudentQuery.exec();
+    ui->statusbar->showMessage("Студента "+ ui->firstName->text()+ " " + ui->nameLabel->text() +" " + ui->lasNameLineEdit->text() +" додано до бази", 5000);
 
 }
 

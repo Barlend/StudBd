@@ -4,27 +4,42 @@
 #include <QApplication>
 #include <QSqlDatabase>
 #include <QMessageBox>
-static bool connect_to_database() //подключаем баззу данных
+#include <QSettings>
+#include <QTextCodec>
+
+
+
+
+static bool connect_to_database(QString Host, QString DatabaseeName, QString user, QString pass, int port) //подключаем баззу данных
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-    db.setHostName("localhost");
-    db.setDatabaseName("StudBd1");
-    db.setUserName("root");
-    db.setPassword("");
+    db.setHostName(Host);
+    db.setDatabaseName(DatabaseeName);
+    db.setUserName(user);
+    db.setPort(port);
+    db.setPassword(pass);
     if (!db.open())
     {
 
         qDebug() << "Error: " << db.lastError();
         return false;
     }
-
     qDebug() << "OK!!!!!";
     return true;
+
 }
+
 int main(int argc, char *argv[])
 {
-        connect_to_database();
+
     QApplication a(argc, argv);
+
+    QTextCodec *codec = QTextCodec::codecForName("Windows-1251");
+    QSettings *set= new QSettings("://config.ini", QSettings::IniFormat);
+    set->setIniCodec(codec);
+    set->beginGroup("database");
+    qDebug()<<set->fileName();
+    connect_to_database(set->value("HostName").toString(), set->value("DatabaseName").toString(),set->value("UserName").toString(), set->value("Password").toString(), set->value("Port").toInt() );
     LoginForm w;
     w.show();
 

@@ -9,6 +9,7 @@
 #include <QSqlQuery>
 #include <QSqlTableModel>
 #include <QTableView>
+
 #include "addstudentform.h"
 namespace Ui {
 class MainWindow;
@@ -37,6 +38,8 @@ private slots:
     void on_FacultiescomboBox_activated(int index);
 
     void on_DepartmentscomboBox_currentIndexChanged(int index);
+
+    void on_tableView_doubleClicked(const QModelIndex &index);
 
 private:
     void FacultitesQuery();

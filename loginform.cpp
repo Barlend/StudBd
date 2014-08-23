@@ -7,9 +7,18 @@ LoginForm::LoginForm(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowTitle("Вітаємо у базі даних студентів");
-    regForm = new RegisterForm;
 
+
+    /////////////
+
+
+    ///////////////
+
+
+    regForm = new RegisterForm;
+//    con = new ConnectToDatabase;
     connect(regForm, SIGNAL(closeEvent(QCloseEvent*)), this, SLOT(show()));
+//    connect(con, SIGNAL(closeEvent(QCloseEvent*)), this, SLOT(show()));
 
     mainForm = new MainWindow;
     connect(this, SIGNAL(sendaccesslevel(QStringList)), mainForm, SLOT(recieveaccesslevl(QStringList)));
@@ -43,7 +52,7 @@ void LoginForm::on_SingInButton_clicked()
         if(ui->LoginlineEdit->text() == user && ui->PasswordlineEdit->text() == password){
             Listforauth << user << accesslevel;
             emit(sendaccesslevel(Listforauth));
-//            ui->StatusLabel->setText(accesslevel);
+            //            ui->StatusLabel->setText(accesslevel);
             this->close();
 
             mainForm->show();
@@ -51,3 +60,7 @@ void LoginForm::on_SingInButton_clicked()
     }
     ui->StatusLabel->setText("Облікових даних не знайдено");
 }
+
+
+
+

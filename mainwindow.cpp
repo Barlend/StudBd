@@ -6,15 +6,16 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    this->setWindowTitle("База студентів");
     AddstudForm = new AddStudentForm;
     model = new QSqlTableModel;
     model->setTable("Students");
-
-    model->select();
     model->setHeaderData(0, Qt::Horizontal, "Прізвище");
     model->setHeaderData(1, Qt::Horizontal, "Ім'я");
     model->setHeaderData(2, Qt::Horizontal, "По-батькові");
     model->setHeaderData(3, Qt::Horizontal, "Номер групи");
+    model->select();
+
     tableView = new QTableView;
     model->removeColumn(0);
 
@@ -182,12 +183,11 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::on_FacultiescomboBox_activated(int index)
 {
     QSqlQuery QueryForFaculties("select s.Name, s.FirstName, s.LastName from StudBd1.Students s, StudBd1.Faculties f where f.id = s.IdOfFaculties and f.id = '" + QString::number(ui->FacultiescomboBox->currentIndex() + 1) +"'");
-//    QueryForFaculties("");
-//    QueryForFaculties.bindValue(0, ui->FacultiescomboBox->currentIndex() +2);
-//    QueryForFaculties.exec();
     qDebug() << ui->FacultiescomboBox->currentIndex()+1 <<" - is index";
 
-
+    qm->setHeaderData(0, Qt::Horizontal, "Прізвище");
+    qm->setHeaderData(1, Qt::Horizontal, "Ім'я");
+    qm->setHeaderData(2, Qt::Horizontal, "По-батькові");
     qm->setQuery(QueryForFaculties);
 
     //    model->setQuery(QSqlQuery(QueryForFaculties));
@@ -200,9 +200,9 @@ void MainWindow::on_DepartmentscomboBox_currentIndexChanged(int index)
 {
     QSqlQuery QueryForFaculties("select s.Name, s.FirstName, s.LastName from StudBd1.Students s, StudBd1.Departments d, StudBd1.Faculties f where s.IdOfDepartment = d.id and s.IdOfFaculties = f.id and s.IdOfDepartment = '"+QString::number(ui->DepartmentscomboBox->currentIndex()+1) + "' and s.IdOfFaculties  = '"+QString::number(ui->FacultiescomboBox->currentIndex()+1) +"'");
 
-//    QueryForFaculties("");
-//    QueryForFaculties.bindValue(0, ui->FacultiescomboBox->currentIndex() +2);
-//    QueryForFaculties.exec();
+    //    QueryForFaculties("");
+    //    QueryForFaculties.bindValue(0, ui->FacultiescomboBox->currentIndex() +2);
+    //    QueryForFaculties.exec();
     qDebug() <<"ui->FacultiescomboBox->currentIndex()+1 ----" <<ui->FacultiescomboBox->currentIndex()+1 <<" - is index";
 
 
@@ -213,5 +213,10 @@ void MainWindow::on_DepartmentscomboBox_currentIndexChanged(int index)
 
 
 
-//        select s.Name, s.FirstName, s.LastName from StudBd1.Students s, StudBd1.Departments d, StudBd1.Faculties f where f.id = 1 	and d.IdForFaculties = f.id	and d.IdForFaculties =
+    //        select s.Name, s.FirstName, s.LastName from StudBd1.Students s, StudBd1.Departments d, StudBd1.Faculties f where f.id = 1 	and d.IdForFaculties = f.id	and d.IdForFaculties =
+}
+
+void MainWindow::on_tableView_doubleClicked(const QModelIndex &index)
+{
+    qDebug()<< index;
 }
