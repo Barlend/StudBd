@@ -33,9 +33,11 @@ int main(int argc, char *argv[])
 {
 
     QApplication a(argc, argv);
-
+    a.setOrganizationName("Belfegor");
+    a.setOrganizationDomain("qtmpp.tk");
+    a.setApplicationName("StudBd");
     QTextCodec *codec = QTextCodec::codecForName("Windows-1251");
-    QSettings *set= new QSettings("://config.ini", QSettings::IniFormat);
+    QSettings *set= new QSettings(qApp->applicationDirPath()+"/config.ini", QSettings::IniFormat);
     set->setIniCodec(codec);
     set->beginGroup("database");
     qDebug()<<set->fileName();
