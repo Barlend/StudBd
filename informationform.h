@@ -12,7 +12,7 @@ class InformationForm : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit InformationForm(QString id, QWidget *parent = 0);
+    explicit InformationForm(QString name,QString firsname, QString lastname, QString lvl, QWidget *parent = 0);
     ~InformationForm();
 
 private:
