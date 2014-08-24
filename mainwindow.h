@@ -9,7 +9,9 @@
 #include <QSqlQuery>
 #include <QSqlTableModel>
 #include <QTableView>
-
+#include <QTableWidget>
+#include <QTableWidgetItem>
+#include "informationform.h"
 #include "addstudentform.h"
 namespace Ui {
 class MainWindow;
@@ -61,6 +63,7 @@ private:
     QTableView *tableView;
     AddStudentForm *AddstudForm;
     QSqlQueryModel *qm;
+    InformationForm *infoform;
 };
 
 #endif // MAINWINDOW_H

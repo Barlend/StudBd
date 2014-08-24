@@ -9,6 +9,29 @@ MainWindow::MainWindow(QWidget *parent) :
     //    ui->tableWidget->setf
     this->setWindowTitle("База студентів");
     AddstudForm = new AddStudentForm;
+
+   ui-> tableWidget->setSelectionMode(QAbstractItemView::SingleSelection);
+   ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
+
+    QSqlQuery QueryForFaculties("select s.Name, s.FirstName, s.LastName from StudBd1.Students s");
+
+    /////////////
+
+    QueryForFaculties.exec();
+   ui-> tableWidget->setColumnCount(3);
+   ui->tableWidget->setHorizontalHeaderLabels(QStringList()<<"Прізвище"<<"Ім'я"<< "По-батькові");
+    while(QueryForFaculties.next()){
+      ui->  tableWidget->insertRow(0);
+       ui-> tableWidget->setItem(0,0, new QTableWidgetItem(QueryForFaculties.value(0).toString()));
+        ui->tableWidget->setItem(0,1, new QTableWidgetItem(QueryForFaculties.value(1).toString()));
+       ui-> tableWidget->setItem(0,2, new QTableWidgetItem(QueryForFaculties.value(2).toString()));
+       ui-> tableWidget->setRowHeight(0,20);
+    }
+
+ui->tableWidget->show();
+
+
+    ////////////////////////////////
     model = new QSqlTableModel;
     model->setTable("Students");
     model->setHeaderData(0, Qt::Horizontal, "Прізвище");
@@ -189,6 +212,7 @@ void MainWindow::on_FacultiescomboBox_activated(int index)
     QueryForFaculties.exec();
     qDebug() << ui->FacultiescomboBox->currentIndex()+1 <<" - is index";
     ui->tableWidget->setColumnCount(3);
+       ui->tableWidget->setHorizontalHeaderLabels(QStringList()<<"Прізвище"<<"Ім'я"<< "По-батькові");
     while(QueryForFaculties.next()){
         ui->tableWidget->insertRow(0);
         ui->tableWidget->setItem(0,0, new QTableWidgetItem(QueryForFaculties.value(0).toString()));
@@ -250,6 +274,7 @@ void MainWindow::on_DepartmentscomboBox_activated(int index)
     QueryForFaculties.exec();
     qDebug() << ui->FacultiescomboBox->currentIndex()+1 <<" - is index";
     ui->tableWidget->setColumnCount(3);
+       ui->tableWidget->setHorizontalHeaderLabels(QStringList()<<"Прізвище"<<"Ім'я"<< "По-батькові");
     while(QueryForFaculties.next()){
         ui->tableWidget->insertRow(0);
         ui->tableWidget->setItem(0,0, new QTableWidgetItem(QueryForFaculties.value(0).toString()));
@@ -292,50 +317,52 @@ void MainWindow::on_tableView_activated(const QModelIndex &index)
 
 void MainWindow::on_tableWidget_cellDoubleClicked(int row, int column)
 {
+    QString temp1,temp2,temp3;
     if(column == 0){
         qDebug() <<"row is - " << row << "           columd is -- " << column;
         QTableWidgetItem *item = ui->tableWidget->item(row, column);
-        QString temp1 = item->text();
+         temp1 = item->text();
         qDebug() <<"temp " <<temp1;
         /////////
         QTableWidgetItem *item1 = ui->tableWidget->item(row, column+1);
-        QString temp2 = item1->text();
+         temp2 = item1->text();
         qDebug() <<"temp " <<temp2;
         /////////
 
         QTableWidgetItem *item2 = ui->tableWidget->item(row, column + 2);
-        QString temp3 = item2->text();
+         temp3 = item2->text();
         qDebug() <<"temp " <<temp3;
     }
     if(column == 1){
         qDebug() <<"row is - " << row << "           columd is -- " << column;
         QTableWidgetItem *item = ui->tableWidget->item(row, column-1);
-        QString temp1 = item->text();
+         temp1 = item->text();
         qDebug() <<"temp " <<temp1;
         /////////
         QTableWidgetItem *item1 = ui->tableWidget->item(row, column);
-        QString temp2 = item1->text();
+         temp2 = item1->text();
         qDebug() <<"temp " <<temp2;
         /////////
 
         QTableWidgetItem *item2 = ui->tableWidget->item(row, column + 1);
-        QString temp3 = item2->text();
+         temp3 = item2->text();
         qDebug() <<"temp " <<temp3;
     }
     if(column == 2){
         qDebug() <<"row is - " << row << "           columd is -- " << column;
         QTableWidgetItem *item = ui->tableWidget->item(row, column-2);
-        QString temp1 = item->text();
+         temp1 = item->text();
         qDebug() <<"temp " <<temp1;
         /////////
         QTableWidgetItem *item1 = ui->tableWidget->item(row, column-1);
-        QString temp2 = item1->text();
+         temp2 = item1->text();
         qDebug() <<"temp " <<temp2;
         /////////
 
         QTableWidgetItem *item2 = ui->tableWidget->item(row, column );
-        QString temp3 = item2->text();
+         temp3 = item2->text();
         qDebug() <<"temp " << temp3;
     }
-
+    infoform = new InformationForm(temp3);
+    infoform->show();
 }
