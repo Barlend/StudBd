@@ -2,7 +2,7 @@
 #define INFORMATIONFORM_H
 
 #include <QMainWindow>
-
+#include <QSqlQuery>
 namespace Ui {
 class InformationForm;
 }

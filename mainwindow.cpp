@@ -6,11 +6,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    //    ui->tableWidget->setf
     this->setWindowTitle("База студентів");
     AddstudForm = new AddStudentForm;
 
-    ui-> tableWidget->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->tableWidget->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
 
     QSqlQuery QueryForFaculties("select s.Name, s.FirstName, s.LastName from StudBd1.Students s");
@@ -74,6 +73,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete AddstudForm;
+    delete infoform;
 }
 
 void MainWindow::recieveaccesslevl(QStringList lvl)
@@ -124,23 +124,7 @@ void MainWindow::on_FacultiescomboBox_currentTextChanged(const QString &arg1)
 
 
 
-void MainWindow::on_FacultiescomboBox_currentIndexChanged(const QString &arg1)
-{
-    //    QStringList temp;
-    ////    QSqlQuery queryForDepartmentcombobox("SELECT StudBd1.Departments.nameOfDepartment IF(StudBd1.Faculties.id = StudBd1.Departments.IdForFaculties , StudBd1.Departments.nameOfDepartment ,SELECT  )");
-    ////    queryForDepartmentcombobox
-    ////     QSqlQuery queryForDepartmentcombobox("SELECT IF(StudBd1.Faculties.id = StudBd1.Departments.IdForFaculties, SELECT StudBd1.Department.nameOfDepartment FROM StudBd1.Departments,0 )");
-    //     QSqlQuery queryForDepartmentcombobox("SELECT StudBd1.Departments.nameOfDepatment FROM StudBd1.Departments WHERE " + arg1 +"= StudBd1.Faculties.NameOfFaculties AND StudBd1.Departments.IdForFaculties = StudBd1.Faculties.id");
 
-    //    while(queryForDepartmentcombobox.next()){
-    //        QString department = queryForDepartmentcombobox.value(0).toString();
-    //        temp.append(department);
-    //    }
-    //    ui->DepartmentscomboBox->addItems(temp);
-
-    //    QString temp1="SELECT StudBd1.Departments.nameOfDepatment FROM StudBd1.Departments WHERE StudBd1.Faculties.NameOfFaculties = " + arg1 ;
-
-}
 
 
 void MainWindow::on_FacultiescomboBox_currentIndexChanged(int index)
@@ -148,9 +132,6 @@ void MainWindow::on_FacultiescomboBox_currentIndexChanged(int index)
 
     ui->DepartmentscomboBox->clear();
     QStringList temp;
-    //    QString r = ui->FacultiescomboBox->currentText();
-    //    QString t = "SELECT f.id, d.nameOfDepartment, d.IdForFaculties FROM Faculties f, Departments d WHERE f.id = d.IdForFaculties AND f.id = '" +QString::number(index+1)+ "'";
-
     QSqlQuery queryForDepartmentcombobox;
     queryForDepartmentcombobox.prepare("SELECT f.id, d.nameOfDepartment, d.IdForFaculties FROM Faculties f, Departments d WHERE f.id = d.IdForFaculties AND f.id = ?");
     queryForDepartmentcombobox.bindValue(0, index+1);
@@ -160,12 +141,6 @@ void MainWindow::on_FacultiescomboBox_currentIndexChanged(int index)
         temp.push_back(department);
     }
     ui->DepartmentscomboBox->addItems(temp);
-
-    //////////////////////////////////
-
-
-
-
 }
 
 void MainWindow::on_pushButton_clicked()

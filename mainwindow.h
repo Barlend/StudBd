@@ -29,8 +29,6 @@ public slots:
 private slots:
     void on_FacultiescomboBox_currentTextChanged(const QString &arg1);
 
-    void on_FacultiescomboBox_currentIndexChanged(const QString &arg1);
-
     void on_FacultiescomboBox_currentIndexChanged(int index);
 
     void on_pushButton_clicked();
