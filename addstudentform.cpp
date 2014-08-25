@@ -15,14 +15,6 @@ AddStudentForm::AddStudentForm(QWidget *parent) :
         tempforfacultites.push_back(queryForFacultiesBox1.value(0).toString());
     }
     ui->FacultiescomboBox->addItems(tempforfacultites);
-
-    ///////////////////
-
-
-
-
-
-
 }
 
 AddStudentForm::~AddStudentForm()
@@ -64,9 +56,6 @@ void AddStudentForm::on_AddSudentButton_clicked()
     ui->label_12->setText(t.toString("dd.MM.yyyy"));
     QString dayEnteredTemp_STring = t.toString("dd.MM.yyyy");
     addStudentQuery.addBindValue(dayEnteredTemp_STring);
-        ///////////////////
-
-
     addStudentQuery.exec();
     ui->statusbar->showMessage("Студента "+ ui->firstName->text()+ " " + ui->nameLabel->text() +" " + ui->lasNameLineEdit->text() +" додано до бази", 5000);
 

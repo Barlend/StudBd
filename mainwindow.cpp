@@ -124,9 +124,6 @@ void MainWindow::on_FacultiescomboBox_currentTextChanged(const QString &arg1)
 
 
 
-
-
-
 void MainWindow::on_FacultiescomboBox_currentIndexChanged(int index)
 {
 
