@@ -143,10 +143,7 @@ void MainWindow::on_FacultiescomboBox_currentIndexChanged(int index)
     ui->DepartmentscomboBox->addItems(temp);
 }
 
-void MainWindow::on_pushButton_clicked()
-{
-    AddstudForm->show();
-}
+
 
 void MainWindow::on_FacultiescomboBox_activated(int index)
 {
@@ -249,4 +246,9 @@ void MainWindow::on_tableWidget_cellDoubleClicked(int row, int column)
 
     infoform = new InformationForm(temp1, temp2, temp3, AcountAccessLevl);
     infoform->show();
+}
+
+void MainWindow::on_Add_Student_pushButton_clicked()
+{
+    AddstudForm->show();
 }

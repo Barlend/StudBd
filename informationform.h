@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include <QSqlQuery>
+#include <QDateEdit>
+#include <QDate>
+
 namespace Ui {
 class InformationForm;
 }

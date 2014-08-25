@@ -35,8 +35,8 @@ AddStudentForm::~AddStudentForm()
 void AddStudentForm::on_AddSudentButton_clicked()
 {
     QSqlQuery addStudentQuery;
-    addStudentQuery.prepare("insert into StudBd1.Students (Name, FirstName, LastName, NumberOfGroup, IdOfFaculties, IdOfDepartment, Telephone, MotherName, FatherName, ParentsPhone)"
-                            "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    addStudentQuery.prepare("insert into StudBd1.Students (Name, FirstName, LastName, NumberOfGroup, IdOfFaculties, IdOfDepartment, Telephone, MotherName, FatherName, ParentsPhone, DateOfBirth, DateOfEntry, EndDate)"
+                            "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     addStudentQuery.addBindValue(ui->nameLabel->text());
     addStudentQuery.addBindValue(ui->firstName->text());
     addStudentQuery.addBindValue(ui->lasNameLineEdit->text());
@@ -47,6 +47,26 @@ void AddStudentForm::on_AddSudentButton_clicked()
     addStudentQuery.addBindValue(ui->MotherNameLineEdit->text());
     addStudentQuery.addBindValue(ui->FatherNameLineEdit->text());
     addStudentQuery.addBindValue(ui->ParentsTelefonNumber->text());
+    ////////////
+    /// \brief date_Of_Birthday
+    /// дата народження
+    /////////////
+    QString date_Of_Birthday = ui->Birth_Day_date->date().toString("dd.MM.yyyy");
+    addStudentQuery.addBindValue(date_Of_Birthday);
+    /////////////////////////
+    /// \brief Date_Of_Entry
+    /// дата вступу та дата закінчення +4 роки
+    /////////////////////////
+    QString Date_Of_Entry = ui->Date_OfEntry->date().toString("dd.MM.yyyy");
+    addStudentQuery.addBindValue(Date_Of_Entry);
+    QDate dayEnteredTemp = ui->Date_OfEntry->date();
+    QDate t = dayEnteredTemp.addYears(4);
+    ui->label_12->setText(t.toString("dd.MM.yyyy"));
+    QString dayEnteredTemp_STring = t.toString("dd.MM.yyyy");
+    addStudentQuery.addBindValue(dayEnteredTemp_STring);
+        ///////////////////
+
+
     addStudentQuery.exec();
     ui->statusbar->showMessage("Студента "+ ui->firstName->text()+ " " + ui->nameLabel->text() +" " + ui->lasNameLineEdit->text() +" додано до бази", 5000);
 

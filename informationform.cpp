@@ -29,6 +29,8 @@ InformationForm::InformationForm(QString name, QString firstname, QString lastna
                 ///////////////
                 QString Telephone = firstquery.value(9).toString();
                 ui->studenttelephonelineedit->setText(Telephone);
+                QString DateOfBirth = firstquery.value(8).toString();
+                ui->studentdateofbirdthlineedit->setText(DateOfBirth);
             }
 }
 

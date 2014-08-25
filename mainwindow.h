@@ -31,13 +31,13 @@ private slots:
 
     void on_FacultiescomboBox_currentIndexChanged(int index);
 
-    void on_pushButton_clicked();
-
     void on_FacultiescomboBox_activated(int index);
 
     void on_DepartmentscomboBox_activated(int index);
 
     void on_tableWidget_cellDoubleClicked(int row, int column);
+
+    void on_Add_Student_pushButton_clicked();
 
 private:
     void FacultitesQuery();

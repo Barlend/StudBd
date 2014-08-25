@@ -8,17 +8,8 @@ LoginForm::LoginForm(QWidget *parent) :
     ui->setupUi(this);
     setWindowTitle("Вітаємо у базі даних студентів");
 
-
-    /////////////
-
-
-    ///////////////
-
-
     regForm = new RegisterForm;
-//    con = new ConnectToDatabase;
     connect(regForm, SIGNAL(closeEvent(QCloseEvent*)), this, SLOT(show()));
-//    connect(con, SIGNAL(closeEvent(QCloseEvent*)), this, SLOT(show()));
 
     mainForm = new MainWindow;
     connect(this, SIGNAL(sendaccesslevel(QStringList)), mainForm, SLOT(recieveaccesslevl(QStringList)));
@@ -43,7 +34,6 @@ void LoginForm::on_pushButton_clicked()
 void LoginForm::on_SingInButton_clicked()
 {
     QSqlQuery query;
-    //    SELECT title, year FROM cd WHERE year >= 1998
     query.exec("select login, password, accesslevel from StudBd1.Users");
     while (query.next()) {
         QString user = query.value(0).toString();
@@ -52,7 +42,6 @@ void LoginForm::on_SingInButton_clicked()
         if(ui->LoginlineEdit->text() == user && ui->PasswordlineEdit->text() == password){
             Listforauth << user << accesslevel;
             emit(sendaccesslevel(Listforauth));
-            //            ui->StatusLabel->setText(accesslevel);
             this->close();
 
             mainForm->show();
