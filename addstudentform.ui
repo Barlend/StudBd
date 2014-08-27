@@ -202,8 +202,8 @@
    <widget class="QLabel" name="label_12">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>230</y>
+      <x>250</x>
+      <y>320</y>
       <width>171</width>
       <height>16</height>
      </rect>
@@ -216,13 +216,13 @@
     <property name="geometry">
      <rect>
       <x>340</x>
-      <y>10</y>
+      <y>-10</y>
       <width>310</width>
       <height>160</height>
      </rect>
     </property>
     <property name="title">
-     <string>Університет</string>
+     <string>GroupBox</string>
     </property>
     <layout class="QGridLayout" name="gridLayout_3">
      <item row="0" column="0">
@@ -319,6 +319,22 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <tabstops>
+  <tabstop>nameLabel</tabstop>
+  <tabstop>firstName</tabstop>
+  <tabstop>lasNameLineEdit</tabstop>
+  <tabstop>TelephoneOfStudent</tabstop>
+  <tabstop>Birth_Day_date</tabstop>
+  <tabstop>MotherNameLineEdit</tabstop>
+  <tabstop>FatherNameLineEdit</tabstop>
+  <tabstop>ParentsTelefonNumber</tabstop>
+  <tabstop>FacultiescomboBox</tabstop>
+  <tabstop>DepartmentscomboBox</tabstop>
+  <tabstop>GroupNumderLineEdit</tabstop>
+  <tabstop>Date_OfEntry</tabstop>
+  <tabstop>Years_of_Schooling</tabstop>
+  <tabstop>AddSudentButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

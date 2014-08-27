@@ -5,7 +5,7 @@
 #include <QSqlQuery>
 #include <QDateEdit>
 #include <QDate>
-
+#include <QDebug>
 namespace Ui {
 class InformationForm;
 }
@@ -20,6 +20,7 @@ public:
 
 private:
     Ui::InformationForm *ui;
+    int idOfFaculties, idOfDepartment;
 };
 
 #endif // INFORMATIONFORM_H
