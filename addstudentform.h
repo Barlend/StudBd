@@ -24,7 +24,8 @@ private slots:
     void on_AddSudentButton_clicked();
 
     void on_FacultiescomboBox_currentIndexChanged(int index);
-
+signals:
+   void closeEvent(QCloseEvent *e);
 private:
     Ui::AddStudentForm *ui;
     QStringList tempforfacultites;

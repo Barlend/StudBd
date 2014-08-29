@@ -33,11 +33,13 @@ private slots:
 
     void on_FacultiescomboBox_activated(int index);
 
-    void on_DepartmentscomboBox_activated(int index);
-
     void on_tableWidget_cellDoubleClicked(int row, int column);
 
     void on_Add_Student_pushButton_clicked();
+
+    void Update_After_Close_Info();
+
+    void on_DepartmentscomboBox_activated(const QString &arg1);
 
 private:
     void FacultitesQuery();
@@ -45,9 +47,7 @@ private:
     QString AcountAccessLevl;
     QDateTime data;
     QStringList tempforfacultites,tempforinstitutes;
-    QSqlTableModel *model;
     AddStudentForm *AddstudForm;
-    QSqlQueryModel *qm;
     InformationForm *infoform;
 };
 

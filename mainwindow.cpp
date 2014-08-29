@@ -7,8 +7,12 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle("База студентів");
-    AddstudForm = new AddStudentForm;
-
+    ///////////////////
+    //////////////////
+    ///
+    ///
+    //    connect(infoform, SIGNAL(closeEvent(QCloseEvent*)), this, SLOT(Update_After_Close_Info()));
+    //    connect(AddstudForm, SIGNAL(closeEvent(QCloseEvent*)), this, SLOT(Update_After_Close_Info()));
     ui->tableWidget->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
 
@@ -20,9 +24,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui-> tableWidget->setColumnCount(3);
     ui->tableWidget->setHorizontalHeaderLabels(QStringList()<<"Прізвище"<<"Ім'я"<< "По-батькові");
     while(QueryForFaculties.next()){
-        ui->  tableWidget->insertRow(0);
+        ui-> tableWidget->insertRow(0);
         ui-> tableWidget->setItem(0,0, new QTableWidgetItem(QueryForFaculties.value(0).toString()));
-        ui->tableWidget->setItem(0,1, new QTableWidgetItem(QueryForFaculties.value(1).toString()));
+        ui-> tableWidget->setItem(0,1, new QTableWidgetItem(QueryForFaculties.value(1).toString()));
         ui-> tableWidget->setItem(0,2, new QTableWidgetItem(QueryForFaculties.value(2).toString()));
         ui-> tableWidget->setRowHeight(0,20);
     }
@@ -106,7 +110,7 @@ void MainWindow::recieveaccesslevl(QStringList lvl)
     query.addBindValue(Tdata);
     query.exec();
 
-    ui->label->setText(AcountAccessLevl);
+    //    ui->label->setText(AcountAccessLevl);
 }
 
 void MainWindow::FacultitesQuery()
@@ -153,9 +157,9 @@ void MainWindow::on_FacultiescomboBox_activated(int index)
     ui->tableWidget->setHorizontalHeaderLabels(QStringList()<<"Прізвище"<<"Ім'я"<< "По-батькові");
     while(QueryForFaculties.next()){
         ui->tableWidget->insertRow(0);
-        ui->tableWidget->setItem(0,0, new QTableWidgetItem(QueryForFaculties.value(0).toString()));
-        ui->tableWidget->setItem(0,1, new QTableWidgetItem(QueryForFaculties.value(1).toString()));
-        ui->tableWidget->setItem(0,2, new QTableWidgetItem(QueryForFaculties.value(2).toString()));
+        ui->tableWidget->setItem(0, 0, new QTableWidgetItem(QueryForFaculties.value(0).toString()));
+        ui->tableWidget->setItem(0, 1, new QTableWidgetItem(QueryForFaculties.value(1).toString()));
+        ui->tableWidget->setItem(0, 2, new QTableWidgetItem(QueryForFaculties.value(2).toString()));
         ui->tableWidget->setRowHeight(0,20);
     }
 
@@ -165,27 +169,27 @@ void MainWindow::on_FacultiescomboBox_activated(int index)
 
 
 
-void MainWindow::on_DepartmentscomboBox_activated(int index)
-{
-    ui->tableWidget->clear();
-    ui->tableWidget->setRowCount(0);
-    QSqlQuery QueryForFaculties("select s.Name, s.FirstName, s.LastName from StudBd1.Students s, StudBd1.Departments d, StudBd1.Faculties f where s.IdOfDepartment = d.id and s.IdOfFaculties = f.id and s.IdOfDepartment = '"+QString::number(ui->DepartmentscomboBox->currentIndex()+1) + "' and s.IdOfFaculties  = '"+QString::number(ui->FacultiescomboBox->currentIndex()+1) +"'");
+//void MainWindow::on_DepartmentscomboBox_activated(int index)
+//{
+//    ui->tableWidget->clear();
+//    ui->tableWidget->setRowCount(0);
+//    QSqlQuery QueryForFaculties("select s.Name, s.FirstName, s.LastName from StudBd1.Students s, StudBd1.Departments d, StudBd1.Faculties f where s.IdOfDepartment = d.id and s.IdOfFaculties = f.id and s.IdOfDepartment = '"+QString::number(ui->DepartmentscomboBox->currentIndex()+1) + "' and s.IdOfFaculties  = '"+QString::number(ui->FacultiescomboBox->currentIndex()+1) +"'");
 
-    /////////////
+//    /////////////
 
-    QueryForFaculties.exec();
-    qDebug() << ui->FacultiescomboBox->currentIndex()+1 <<" - is index";
-    ui->tableWidget->setColumnCount(3);
-    ui->tableWidget->setHorizontalHeaderLabels(QStringList()<<"Прізвище"<<"Ім'я"<< "По-батькові");
-    while(QueryForFaculties.next()){
-        ui->tableWidget->insertRow(0);
-        ui->tableWidget->setItem(0,0, new QTableWidgetItem(QueryForFaculties.value(0).toString()));
-        ui->tableWidget->setItem(0,1, new QTableWidgetItem(QueryForFaculties.value(1).toString()));
-        ui->tableWidget->setItem(0,2, new QTableWidgetItem(QueryForFaculties.value(2).toString()));
-        ui->tableWidget->setRowHeight(0,20);
-    }
+//    QueryForFaculties.exec();
+//    qDebug() << ui->FacultiescomboBox->currentIndex()+1 <<" - is index";
+//    ui->tableWidget->setColumnCount(3);
+//    ui->tableWidget->setHorizontalHeaderLabels(QStringList()<<"Прізвище"<<"Ім'я"<< "По-батькові");
+//    while(QueryForFaculties.next()){
+//        ui->tableWidget->insertRow(0);
+//        ui->tableWidget->setItem(0,0, new QTableWidgetItem(QueryForFaculties.value(0).toString()));
+//        ui->tableWidget->setItem(0,1, new QTableWidgetItem(QueryForFaculties.value(1).toString()));
+//        ui->tableWidget->setItem(0,2, new QTableWidgetItem(QueryForFaculties.value(2).toString()));
+//        ui->tableWidget->setRowHeight(0,20);
+//    }
 
-}
+//}
 
 
 
@@ -242,10 +246,76 @@ void MainWindow::on_tableWidget_cellDoubleClicked(int row, int column)
     }
 
     infoform = new InformationForm(temp1, temp2, temp3, AcountAccessLevl);
+    connect(infoform, SIGNAL(closeEvent(QCloseEvent*)), this, SLOT(Update_After_Close_Info()));
     infoform->show();
 }
 
 void MainWindow::on_Add_Student_pushButton_clicked()
 {
+    AddstudForm = new AddStudentForm;
+    connect(AddstudForm, SIGNAL(closeEvent(QCloseEvent*)), this, SLOT(Update_After_Close_Info()));
     AddstudForm->show();
+}
+
+void MainWindow::Update_After_Close_Info()
+{
+    QSqlQuery QueryForFaculties("select s.Name, s.FirstName, s.LastName from StudBd1.Students s");
+
+    /////////////
+
+    QueryForFaculties.exec();
+    ui-> tableWidget->setColumnCount(3);
+    ui->tableWidget->setHorizontalHeaderLabels(QStringList()<<"Прізвище"<<"Ім'я"<< "По-батькові");
+    while(QueryForFaculties.next()){
+        ui->tableWidget->insertRow(0);
+        ui->tableWidget->setItem(0,0, new QTableWidgetItem(QueryForFaculties.value(0).toString()));
+        ui->tableWidget->setItem(0,1, new QTableWidgetItem(QueryForFaculties.value(1).toString()));
+        ui->tableWidget->setItem(0,2, new QTableWidgetItem(QueryForFaculties.value(2).toString()));
+        ui->tableWidget->setRowHeight(0,20);
+    }
+
+    ui->tableWidget->show();
+}
+///////////////////////
+/// \brief MainWindow::on_DepartmentscomboBox_currentIndexChanged
+/// \param arg1
+///
+///
+///
+////////////////////////
+
+
+void MainWindow::on_DepartmentscomboBox_activated(const QString &arg1)
+{
+    int Id_Of_Department;
+    ui->tableWidget->clear();
+    ui->tableWidget->setRowCount(0);
+    //////////////////
+    /// \brief Department_and_fac_index
+    /// вибирається айдішник кафедри для запису
+    //////////////////
+    QSqlQuery Department_and_fac_index;
+    Department_and_fac_index.prepare("select id from Departments d where nameOfDepartment = ?");
+    Department_and_fac_index.bindValue(0, arg1);
+    Department_and_fac_index.exec();
+    while(Department_and_fac_index.next()){
+        Id_Of_Department = Department_and_fac_index.value(0).toInt();
+    }
+    QSqlQuery Update_Dep;
+    Update_Dep.prepare("select s.Name, s.FirstName, s.LastName from Students s where s.IdOfDepartment = ?");
+    Update_Dep.addBindValue(Id_Of_Department);
+    Update_Dep.exec();
+    ///////////
+
+    ui-> tableWidget->setColumnCount(3);
+    ui->tableWidget->setHorizontalHeaderLabels(QStringList()<<"Прізвище"<<"Ім'я"<< "По-батькові");
+    while(Update_Dep.next()){
+        ui->tableWidget->insertRow(0);
+        ui->tableWidget->setItem(0, 0, new QTableWidgetItem(Update_Dep.value(0).toString()));
+        ui->tableWidget->setItem(0, 1, new QTableWidgetItem(Update_Dep.value(1).toString()));
+        ui->tableWidget->setItem(0, 2, new QTableWidgetItem(Update_Dep.value(2).toString()));
+        ui->tableWidget->setRowHeight(0,25);
+    }
+
+    ui->tableWidget->show();
 }

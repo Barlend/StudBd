@@ -18,24 +18,57 @@ InformationForm::InformationForm(QString name, QString firstname, QString lastna
         QString Name = firstquery.value(1).toString();
         ui->namelineedit->setText(Name);
         ///////////
+        /// \brief FirstName
+        ///////////
         QString FirstName = firstquery.value(2).toString();
         ui->firstnamelineedit->setText(FirstName);
+        /////////
+        /// \brief LastName
         /////////
         QString LastName = firstquery.value(3).toString();
         ui->lastnamelineedit->setText(LastName);
         //////////////
+        /// \brief NumberOfGroup
+        ///////////////
         QString NumberOfGroup = firstquery.value(4).toString();
         ui->numberofgroup->setText(NumberOfGroup);
         ///////////////
+        /// \brief Telephone
+        /// телефон студента
+        ////////////////////
         QString Telephone = firstquery.value(9).toString();
         ui->studenttelephonelineedit->setText(Telephone);
+        ////////////////
+        /// \brief DateOfBirth
+        ////////////////
         QString DateOfBirth = firstquery.value(8).toString();
         ui->studentdateofbirdthlineedit->setText(DateOfBirth);
+        /////////////////
+        /// \brief Date_Of_Entry
+        ////////////////////
         QString Date_Of_Entry = firstquery.value(10).toString();
         ui->Date_Of_Entry->setText(Date_Of_Entry);
-        ///////
+        /////////////////
+        /// \brief End_Date
+        ////////////////
         QString End_Date = firstquery.value(11).toString();
         ui->End_Date->setText(End_Date);
+        ///////////////////////////
+        /// \brief Father_name
+        ///////////////////////////
+        QString Father_name = firstquery.value(13).toString();
+        ui->fathernalelineedit->setText(Father_name);
+        ///////////////////
+        /// \brief Mother_name
+        /////////////////
+        QString Mother_name = firstquery.value(14).toString();
+        ui->mothernamelineedit->setText(Mother_name);
+        ////////////////////////
+        /// \brief Parents_Telaphone
+        ///
+        QString Parents_Telaphone = firstquery.value(15).toString();
+        ui->parentsphonelineedit->setText(Parents_Telaphone);
+        /////////////////////
 
         idOfFaculties = firstquery.value(6).toInt();
         idOfDepartment = firstquery.value(5).toInt();
@@ -43,8 +76,11 @@ InformationForm::InformationForm(QString name, QString firstname, QString lastna
 
     qDebug() <<" id of department" <<idOfDepartment;
     qDebug() <<" id of idOfFaculties" <<idOfFaculties;
-
-    //select f.NameOfFaculties, d.nameOfDepartment from Faculties f, Departments d where f.id =1 and d.id =1
+    /////////////
+    /// \brief seconquery
+    /// вивід факультету та інституту
+    /// айдішники отримуються з попереднього запиту
+    /////////////
     QSqlQuery seconquery;
     seconquery.prepare("select d.nameOfDepartment, f.NameOfFaculties from Departments d, Faculties f where d.id = ? and f.id = ?");
     seconquery.addBindValue(idOfDepartment);

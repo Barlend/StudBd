@@ -17,7 +17,8 @@ class InformationForm : public QMainWindow
 public:
     explicit InformationForm(QString name,QString firsname, QString lastname, QString lvl, QWidget *parent = 0);
     ~InformationForm();
-
+signals:
+   void closeEvent(QCloseEvent *e);
 private:
     Ui::InformationForm *ui;
     int idOfFaculties, idOfDepartment;

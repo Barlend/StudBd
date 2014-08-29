@@ -189,8 +189,8 @@
    <widget class="QPushButton" name="AddSudentButton">
     <property name="geometry">
      <rect>
-      <x>350</x>
-      <y>270</y>
+      <x>340</x>
+      <y>190</y>
       <width>98</width>
       <height>23</height>
      </rect>
@@ -202,7 +202,7 @@
    <widget class="QLabel" name="label_12">
     <property name="geometry">
      <rect>
-      <x>250</x>
+      <x>370</x>
       <y>320</y>
       <width>171</width>
       <height>16</height>
@@ -216,13 +216,13 @@
     <property name="geometry">
      <rect>
       <x>340</x>
-      <y>-10</y>
+      <y>10</y>
       <width>310</width>
       <height>160</height>
      </rect>
     </property>
     <property name="title">
-     <string>GroupBox</string>
+     <string>Університет</string>
     </property>
     <layout class="QGridLayout" name="gridLayout_3">
      <item row="0" column="0">
@@ -267,7 +267,11 @@
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="QDateEdit" name="Date_OfEntry"/>
+      <widget class="QDateEdit" name="Date_OfEntry">
+       <property name="calendarPopup">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
      <item row="4" column="0" colspan="2">
       <widget class="QLabel" name="label_14">
