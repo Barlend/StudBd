@@ -15,7 +15,7 @@ ConnectToDatabase::ConnectToDatabase(QString _Host, QString _DatabaseName, QStri
     QTimer *timer = new QTimer(this);
     QObject::connect(timer, SIGNAL(timeout()),this,  SLOT(Reconect()));
     timer->start(10000);
-//    Reconect();
+    Reconect();
 }
 
 void ConnectToDatabase::SetHost(QString _Host)
@@ -46,7 +46,7 @@ void ConnectToDatabase::SetPort(int _Port)
 
 void ConnectToDatabase::Connect()
 {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
+    db = QSqlDatabase::addDatabase("QMYSQL");
     db.setHostName(HostName);
     db.setDatabaseName(DatabaseName);
     db.setUserName(UserName);
@@ -74,7 +74,7 @@ bool ConnectToDatabase::isConnected()
 void ConnectToDatabase::Reconect()
 {
 //    qDebug() << "isValid - " <<db.isValid() ;
-    if(!db.open()){
+    if(!db.isOpen()){
         db.open();
         qDebug() <<"was open";
     }else{
