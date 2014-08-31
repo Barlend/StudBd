@@ -24,11 +24,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui-> tableWidget->setColumnCount(3);
     ui->tableWidget->setHorizontalHeaderLabels(QStringList()<<"Прізвище"<<"Ім'я"<< "По-батькові");
     while(QueryForFaculties.next()){
-        ui-> tableWidget->insertRow(0);
-        ui-> tableWidget->setItem(0,0, new QTableWidgetItem(QueryForFaculties.value(0).toString()));
-        ui-> tableWidget->setItem(0,1, new QTableWidgetItem(QueryForFaculties.value(1).toString()));
-        ui-> tableWidget->setItem(0,2, new QTableWidgetItem(QueryForFaculties.value(2).toString()));
-        ui-> tableWidget->setRowHeight(0,20);
+        ui->tableWidget->insertRow(0);
+        ui->tableWidget->setItem(0,0, new QTableWidgetItem(QueryForFaculties.value(0).toString()));
+        ui->tableWidget->setItem(0,1, new QTableWidgetItem(QueryForFaculties.value(1).toString()));
+        ui->tableWidget->setItem(0,2, new QTableWidgetItem(QueryForFaculties.value(2).toString()));
+        ui->tableWidget->setRowHeight(0,20);
     }
 
     ui->tableWidget->show();

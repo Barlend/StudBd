@@ -17,13 +17,15 @@ SOURCES += main.cpp\
     loginform.cpp \
     registerform.cpp \
     addstudentform.cpp \
-    informationform.cpp
+    informationform.cpp \
+    connecttodatabase.cpp
 
 HEADERS  += mainwindow.h \
     loginform.h \
     registerform.h \
     addstudentform.h \
-    informationform.h
+    informationform.h \
+    connecttodatabase.h
 
 FORMS    += mainwindow.ui \
     loginform.ui \

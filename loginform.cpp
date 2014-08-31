@@ -7,7 +7,10 @@ LoginForm::LoginForm(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowTitle("Вітаємо у базі даних студентів");
-
+    setWindowFlags(Qt::Window
+                   | Qt::WindowMinimizeButtonHint
+                   | Qt::WindowCloseButtonHint
+                   | Qt::CustomizeWindowHint);
     regForm = new RegisterForm;
     connect(regForm, SIGNAL(closeEvent(QCloseEvent*)), this, SLOT(show()));
 

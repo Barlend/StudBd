@@ -6,12 +6,16 @@
 #include <QMessageBox>
 #include <QSettings>
 #include <QTextCodec>
+#include "connecttodatabase.h"
 
 
 
 
 static bool connect_to_database(QString Host, QString DatabaseeName, QString user, QString pass, int port) //подключаем баззу данных
 {
+
+
+
     QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
     db.setHostName(Host);
     db.setDatabaseName(DatabaseeName);
@@ -20,7 +24,6 @@ static bool connect_to_database(QString Host, QString DatabaseeName, QString use
     db.setPassword(pass);
     if (!db.open())
     {
-
         qDebug() << "Error: " << db.lastError();
         return false;
     }
@@ -41,9 +44,16 @@ int main(int argc, char *argv[])
     set->setIniCodec(codec);
     set->beginGroup("database");
     qDebug()<<set->fileName();
-    connect_to_database(set->value("HostName").toString(), set->value("DatabaseName").toString(),set->value("UserName").toString(), set->value("Password").toString(), set->value("Port").toInt() );
+
+    ConnectToDatabase con(set->value("HostName").toString(), set->value("DatabaseName").toString(),set->value("UserName").toString(), set->value("Password").toString(), set->value("Port").toInt());
+    con.Connect();
     LoginForm w;
     w.show();
 
-    return a.exec();
+
+
+    //    connect_to_database(set->value("HostName").toString(), set->value("DatabaseName").toString(),set->value("UserName").toString(), set->value("Password").toString(), set->value("Port").toInt() );
+
+
+        return a.exec();
 }

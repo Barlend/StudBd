@@ -72,7 +72,15 @@ void AddStudentForm::on_AddSudentButton_clicked()
     addStudentQuery.addBindValue(dayEnteredTemp_STring);
     addStudentQuery.exec();
     ui->statusbar->showMessage("Студента  ->   "+ ui->firstName->text()+ " " + ui->nameLabel->text() +" " + ui->lasNameLineEdit->text() +" додано до бази", 5000);
-
+    ui->nameLabel->clear();
+    ui->firstName->clear();
+    ui->lasNameLineEdit->clear();
+    ui->GroupNumderLineEdit->clear();
+    //        ui->FacultiescomboBox->clear();
+    ui->TelephoneOfStudent->clear();
+    ui->MotherNameLineEdit->clear();
+    ui->FatherNameLineEdit->clear();
+    ui->ParentsTelefonNumber->clear();
 }
 
 void AddStudentForm::on_FacultiescomboBox_currentIndexChanged(int index)
