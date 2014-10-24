@@ -6,6 +6,7 @@
 #include <QDateEdit>
 #include <QDate>
 #include <QDebug>
+#include <QMessageBox>
 namespace Ui {
 class InformationForm;
 }
@@ -20,9 +21,14 @@ public:
 signals:
     void closeEvent(QCloseEvent *e);
 
+
+
+private slots:
+    void on_Chenges__triggered();
+
 private:
     Ui::InformationForm *ui;
-    int idOfFaculties, idOfDepartment;
+    int idOfFaculties, idOfDepartment, idStudent;
 };
 
 #endif // INFORMATIONFORM_H

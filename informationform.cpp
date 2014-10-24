@@ -6,6 +6,13 @@ InformationForm::InformationForm(QString name, QString firstname, QString lastna
     ui(new Ui::InformationForm)
 {
     ui->setupUi(this);
+    qDebug()<<"lvl = " << lvl;
+    ///////
+    ////////
+    /// редагування данних
+    /// ///
+    ui->Chenges_->setEnabled(lvl == "superuser" || lvl == "admin" ? true:false);//24.10.14
+    ui->statusbar->showMessage(lvl == "superuser" || lvl == "admin" ? "Ви маєте право редагувати данні":"Ваш рівень доступу не дозволяє змінювати дані", 15000);
     QString fac, dep;
     this->setWindowTitle("Студент "+name + " " + firstname + " " + lastname);
     QSqlQuery firstquery;
@@ -15,6 +22,8 @@ InformationForm::InformationForm(QString name, QString firstname, QString lastna
     firstquery.bindValue(2, lastname);
     firstquery.exec();
     while(firstquery.next()){
+        idStudent = firstquery.value(0).toInt();
+        qDebug()<<"firstquery.value(0).toInt()" << idStudent;
         QString Name = firstquery.value(1).toString();
         ui->namelineedit->setText(Name);
         ///////////
@@ -105,5 +114,70 @@ InformationForm::~InformationForm()
 {
     delete ui;
 }
+
+
+
+
+
+void InformationForm::on_Chenges__triggered()
+{
+    qDebug ()<<"on_Chenges__triggered";
+    QSqlQuery updateQuery;
+    //    QString tempq = ("UPDATE StudBd1.Students SET Name = '"+ui->namelineedit->text()+"', FirstName = '"+ui->firstnamelineedit->text()+"', LastName = '"+ui->lastnamelineedit->text()+"', NumberOfGroup = '"+ui->numberofgroup->text()+"' DateOfBirth = '"+ui->studentdateofbirdthlineedit->text()+"', Telephone = '"+ui->studenttelephonelineedit->text()+"', DateOfEntry = '"+ui->Date_Of_Entry->text()+"', EndDate = '"+ui->End_Date->text()+"', FatherName = '"+ui->fathernalelineedit->text()+"', MotherName = '"+ui->mothernamelineedit->text()+"', ParentsPhone ='"+ui->parentsphonelineedit->text()+"' WHERE id = "+idStudent+"");
+    //    updateQuery.prepare("UPDATE StudBd1.Students SET Name = ?, FirstName = ?, LastName = ?, NumberOfGroup = ? DateOfBirth = ?, Telephone = ?, DateOfEntry = ?, EndDate = ?, FatherName = ?, MotherName =?, ParentsPhone =? WHERE id = ?");
+    //    updateQuery.prepare("UPDATE StudBd1.Students SET Name = '"+ui->namelineedit->text()+"', FirstName = '"+ui->firstnamelineedit->text()+"', LastName = '"+ui->lastnamelineedit->text()+"', NumberOfGroup = '"+ui->numberofgroup->text()+"' DateOfBirth = '"+ui->studentdateofbirdthlineedit->text()+"', Telephone = '"+ui->studenttelephonelineedit->text()+"', DateOfEntry = '"+ui->Date_Of_Entry->text()+"', EndDate = '"+ui->End_Date->text()+"', FatherName = '"+ui->fathernalelineedit->text()+"', MotherName = '"+ui->mothernamelineedit->text()+"', ParentsPhone ='"+ui->parentsphonelineedit->text()+"' WHERE id = '"+idStudent+"'");
+    //        updateQuery.prepare("UPDATE StudBd1.Students s SET Name = :Name, FirstName = ?, LastName = ?, NumberOfGroup = ? DateOfBirth = ?, Telephone = ?, DateOfEntry = ?, EndDate = ?, FatherName = ?, MotherName =?, ParentsPhone =? WHERE id = ?"););
+    updateQuery.prepare("UPDATE StudBd1.Students s SET s.Name = :Name, s.FirstName = :FirstName, s.LastName = :LastName, s.NumberOfGroup = :NumberOfGroup, s.DateOfBirth = :DateOfBirth, s.Telephone = :Telephone, s.DateOfEntry = :DateOfEntry, s.EndDate = :EndDate, s.FatherName = :FatherName, s.MotherName =:MotherName, s.ParentsPhone = :ParentsPhone WHERE s.id = :id");
+
+
+
+
+
+
+    updateQuery.bindValue(":Name" ,ui->namelineedit->text());
+    updateQuery.bindValue(":FirstName", ui->firstnamelineedit->text());
+    updateQuery.bindValue(":LastName", ui->lastnamelineedit->text());
+    updateQuery.bindValue(":NumberOfGroup", ui->numberofgroup->text());
+    updateQuery.bindValue(":DateOfBirth", ui->studentdateofbirdthlineedit->text());
+    updateQuery.bindValue(":Telephone", ui->studenttelephonelineedit->text());
+    updateQuery.bindValue(":DateOfEntry", ui->Date_Of_Entry->text());
+    updateQuery.bindValue(":EndDate", ui->End_Date->text());
+    updateQuery.bindValue(":FatherName", ui->fathernalelineedit->text());
+    updateQuery.bindValue(":MotherName", ui->mothernamelineedit->text());
+    updateQuery.bindValue(":ParentsPhone" , ui->parentsphonelineedit->text());
+    updateQuery.bindValue(":id", idStudent);
+
+
+
+    QMessageBox msgBox;
+    msgBox.setText("У обліковий запис внесені зміни");
+    msgBox.setInformativeText("Ви впевнені що бажаєте зберегти зміни?");
+    msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Cancel);
+    msgBox.setDefaultButton(QMessageBox::Save);
+    int ret = msgBox.exec();
+
+    switch (ret) {
+    case QMessageBox::Save:
+        // Save was clicked
+        updateQuery.exec();
+        ui->statusbar->showMessage("Вітаємо! Зміни збережено!", 5000);
+        break;
+
+    default:
+        // should never be reached
+        ui->statusbar->showMessage("Зміни до облікового запису не внесені!", 5000);
+        break;
+    }
+}
+
+
+
+
+
+
+
+
+
+
 
 
