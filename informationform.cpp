@@ -6,6 +6,7 @@ InformationForm::InformationForm(QString name, QString firstname, QString lastna
     ui(new Ui::InformationForm)
 {
     ui->setupUi(this);
+    connect(ui->save_button, SIGNAL(clicked()), this, SLOT(on_Chenges__triggered()));
     qDebug()<<"lvl = " << lvl;
     ///////
     ////////
